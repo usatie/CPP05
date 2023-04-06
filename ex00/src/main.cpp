@@ -1,6 +1,8 @@
 #include <iomanip>
 #include <iostream>
 
+#include "Bureaucrat.hpp"
+
 #define RESET "\033[m"
 #define GREEN "\033[0;32m"
 #define RED "\033[0;31m"
@@ -34,11 +36,121 @@ void printSubtitle(std::string const& subtitle) {
   std::cout << RESET << std::setfill(' ') << std::setw(0);
 }
 
-void test_from_subject() {
-  printTitle("Test from sunject pdf");
+void test_bureaucrat() {
+  printTitle("Test Bureaucrat");
+  // Test Orthodox Canonical Form
+  {
+    printSubtitle("Test Orthodox Canonical Form");
+    Bureaucrat a;
+    Bureaucrat b(a);
+    Bureaucrat c = b;
+    a = c;
+  }
+  // Test Constructor
+  {
+    printSubtitle("Test Constructor");
+    try {
+      Bureaucrat bureaucrat("Bureaucrat", 1);
+      std::cout << bureaucrat << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Constructor Grade Too High
+  {
+    printSubtitle("Test Constructor Grade Too High");
+    try {
+      Bureaucrat bureaucrat("Bureaucrat", 0);
+      std::cout << bureaucrat << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Constructor Grade Too Low
+  {
+    printSubtitle("Test Constructor Grade Too Low");
+    try {
+      Bureaucrat bureaucrat("Bureaucrat", 151);
+      std::cout << bureaucrat << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test getName
+  {
+    printSubtitle("Test getName");
+    try {
+      Bureaucrat bureaucrat("Shun Usami", 42);
+      std::cout << bureaucrat.getName() << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test getGrade
+  {
+    printSubtitle("Test getGrade");
+    try {
+      Bureaucrat bureaucrat("Shun Usami", 42);
+      std::cout << bureaucrat.getGrade() << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Increment
+  {
+    printSubtitle("Test Increment");
+    try {
+      Bureaucrat bureaucrat("Bureaucrat", 42);
+      std::cout << bureaucrat << std::endl;
+      bureaucrat.incrementGrade();
+      std::cout << bureaucrat << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Decrement
+  {
+    printSubtitle("Test Decrement");
+    try {
+      Bureaucrat bureaucrat("Bureaucrat", 42);
+      std::cout << bureaucrat << std::endl;
+      bureaucrat.decrementGrade();
+      std::cout << bureaucrat << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Increment Grade Too High
+  {
+    printSubtitle("Test Increment Grade Too High");
+    try {
+      Bureaucrat bureaucrat("Bureaucrat", 1);
+      std::cout << bureaucrat << std::endl;
+      bureaucrat.incrementGrade();
+      std::cout << bureaucrat << std::endl;
+      bureaucrat.incrementGrade();
+      std::cout << bureaucrat << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Decrement Grade Too Low
+  {
+    printSubtitle("Test Decrement Grade Too Low");
+    try {
+      Bureaucrat bureaucrat("Bureaucrat", 150);
+      std::cout << bureaucrat << std::endl;
+      bureaucrat.decrementGrade();
+      std::cout << bureaucrat << std::endl;
+      bureaucrat.decrementGrade();
+      std::cout << bureaucrat << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
 }
 
 int main(void) {
-  test_from_subject();
+  test_bureaucrat();
   return 0;
 }
