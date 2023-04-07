@@ -12,7 +12,7 @@ class RobotomyRequestForm : public AForm {
   ~RobotomyRequestForm();
 
   // Constructor
-  RobotomyRequestForm(std::string const& target);
+  explicit RobotomyRequestForm(std::string const& target);
 
  private:
   // Execute Action of the form
