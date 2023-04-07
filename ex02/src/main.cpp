@@ -2,8 +2,9 @@
 #include <iostream>
 
 #include "AForm.hpp"
-#include "ShrubberyCreationForm.hpp"
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 #define RESET "\033[m"
 #define GREEN "\033[0;32m"
@@ -263,8 +264,79 @@ void test_shrubbery_creation_form() {
   }
 }
 
+void test_robotomy_request_form() {
+  printTitle("Test Robotomy Request Form");
+  // Test Orthodox Canonical Form
+  {
+    printSubtitle("Test Orthodox Canonical Form");
+    RobotomyRequestForm a;
+    RobotomyRequestForm b(a);
+    RobotomyRequestForm c = b;
+    a = c;
+  }
+  // Test Constructor
+  {
+    printSubtitle("Test Constructor");
+    try {
+      RobotomyRequestForm form("Pawapoke-kun");
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute
+  {
+    printSubtitle("Test Execute");
+    try {
+      RobotomyRequestForm form("Pawapoke-kun");
+      Bureaucrat bureaucrat("Tanaka", 42);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.beSigned(bureaucrat);
+      // Execute 10 times
+      for (int i = 0; i < 10; i++) {
+        form.execute(bureaucrat);
+      }
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute Grade Too Low
+  {
+    printSubtitle("Test Execute Grade Too Low");
+    try {
+      RobotomyRequestForm form("Pawapoke-kun");
+      Bureaucrat bureaucrat("Tanaka", 150);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.execute(bureaucrat);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute Form Not Signed
+  {
+    printSubtitle("Test Execute Form Not Signed");
+    try {
+      RobotomyRequestForm form("Pawapoke-kun");
+      Bureaucrat bureaucrat("Tanaka", 42);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.execute(bureaucrat);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+}
+
 int main(void) {
+  // Set random seed for RobotomyRequestForm
+  srand((unsigned int)time(NULL));
   test_bureaucrat();
   test_shrubbery_creation_form();
+  test_robotomy_request_form();
   return 0;
 }
