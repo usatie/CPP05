@@ -1,0 +1,24 @@
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
+
+#include "AForm.hpp"
+
+class RobotomyRequestForm : public AForm {
+ public:
+  // Orthodox Canonical Form
+  RobotomyRequestForm();
+  RobotomyRequestForm(const RobotomyRequestForm& r);
+  RobotomyRequestForm& operator=(const RobotomyRequestForm& r);
+  ~RobotomyRequestForm();
+
+  // Constructor
+  explicit RobotomyRequestForm(std::string const& target);
+
+ private:
+  // Execute Action of the form
+  void executeAction() const;
+  // Make a copy of the form
+  AForm* makeCopy(std::string const& target) const;
+};
+
+#endif

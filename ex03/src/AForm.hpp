@@ -1,0 +1,88 @@
+#ifndef AFORM_HPP
+#define AFORM_HPP
+
+#include <iostream>
+
+#include "Bureaucrat.hpp"
+
+class AForm {
+ private:
+  const std::string _name;
+  bool _isSigned;
+  const int _gradeToSign;
+  const int _gradeToExecute;
+  const std::string _target;
+
+ protected:
+  virtual void executeAction() const = 0;
+
+ public:
+  // Orthodox Canonical Form
+  AForm();
+  AForm(const AForm& f);
+  AForm& operator=(const AForm& f);
+  virtual ~AForm();
+
+  // Constructor
+  AForm(std::string const& name, int gradeToSign, int gradeToExecute,
+        std::string const& target);
+
+  // Member functions
+  void beSigned(const Bureaucrat& b);
+  void execute(const Bureaucrat& executor) const;
+  virtual AForm* makeCopy(std::string const& target) const = 0;
+
+  // Getters
+  std::string getName() const;
+  bool getIsSigned() const;
+  int getGradeToSign() const;
+  int getGradeToExecute() const;
+  std::string getTarget() const;
+
+  // Exceptions
+  class GradeTooHighException : public std::exception {
+   public:
+    // According to subject PDF, exception classes don't have to be designed
+    // in Orthodox Canonical AForm
+    GradeTooHighException() throw();  // throw() is a C++98 thing. It's not
+                                      // needed in C++11. It's a hint to the
+                                      // compiler that the function will not
+                                      // throw an exception.
+    virtual ~GradeTooHighException() throw();
+    // what() is a virtual function in std::exception
+    virtual const char* what() const throw();
+    // Constructor
+    explicit GradeTooHighException(int grade) throw();
+
+   private:
+    std::string _description;
+  };
+
+  class GradeTooLowException : public std::exception {
+   public:
+    // std::exception
+    GradeTooLowException() throw();
+    virtual ~GradeTooLowException() throw();
+    // what() is a virtual function in std::exception
+    virtual const char* what() const throw();
+    // Constructor
+    explicit GradeTooLowException(int grade) throw();
+
+   private:
+    std::string _description;
+  };
+
+  class FormNotSignedException : public std::exception {
+   public:
+    // std::exception
+    FormNotSignedException() throw();
+    virtual ~FormNotSignedException() throw();
+    // what() is a virtual function in std::exception
+    virtual const char* what() const throw();
+  };
+};
+
+// Insertion operator
+std::ostream& operator<<(std::ostream& os, const AForm& f);
+
+#endif
