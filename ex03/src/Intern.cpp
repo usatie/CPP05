@@ -7,7 +7,7 @@
 #include "ShrubberyCreationForm.hpp"
 
 /* ==============================================
- *           Static variables
+ *                Static variables
  * ============================================== */
 const AForm* Intern::_forms[3] = {new ShrubberyCreationForm(),
                                   new RobotomyRequestForm(),
@@ -52,7 +52,7 @@ Intern::~Intern() {
  * ============================================== */
 AForm* Intern::makeForm(const std::string& formName,
                         const std::string& target) {
-  for (int i = 0; i < 3; i++) {
+  for (unsigned int i = 0; i < sizeof(_forms) / sizeof(*_forms); i++) {
     if (formName == _forms[i]->getName()) {
       std::cout << "Intern creates " << formName << std::endl;
       return _forms[i]->makeCopy(target);
