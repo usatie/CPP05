@@ -6,6 +6,8 @@
 #define FORM_NAME "Shrubbery Creation Form"
 #define GRADE_TO_SIGN 145
 #define GRADE_TO_EXECUTE 137
+#define RESET "\033[m"
+#define RED "\033[0;31m"
 
 /* ==============================================
  *           Orthodox Canonical Form
@@ -64,8 +66,9 @@ void ShrubberyCreationForm::executeAction() const {
 #endif
   std::ofstream ofs(getTarget() + "_shrubbery");
   if (!ofs) {
-    std::cerr << "Error: cannot open file " << getTarget() << "_shrubbery"
-              << std::endl;
+    std::cerr << RED << "Error: cannot open file " << getTarget()
+              << "_shrubbery" << std::endl
+              << RESET;
     return;
   }
   // Create a file with the target name and write ASCII trees in it
