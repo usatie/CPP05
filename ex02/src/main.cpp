@@ -1,8 +1,8 @@
 #include <iomanip>
 #include <iostream>
 
-#include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
 #define RESET "\033[m"
 #define GREEN "\033[0;32m"

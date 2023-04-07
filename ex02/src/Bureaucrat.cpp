@@ -1,8 +1,9 @@
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
 
 #include <iostream>
 #include <sstream>
+
+#include "AForm.hpp"
 
 /* ==============================================
  *           Orthodox Canonical Form

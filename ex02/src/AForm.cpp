@@ -11,7 +11,8 @@ AForm::AForm()
     : _name("default"),
       _isSigned(false),
       _gradeToSign(LOWEST_GRADE),
-      _gradeToExecute(LOWEST_GRADE) {
+      _gradeToExecute(LOWEST_GRADE),
+      _target("default") {
 #if DEBUG
   std::cout << "[ AForm Default constructor called ]" << std::endl;
 #endif
@@ -22,7 +23,8 @@ AForm::AForm(const AForm& f)
     : _name(f._name),
       _isSigned(f._isSigned),
       _gradeToSign(f._gradeToSign),
-      _gradeToExecute(f._gradeToExecute) {
+      _gradeToExecute(f._gradeToExecute),
+      _target(f._target) {
 #if DEBUG
   std::cout << "[ AForm Copy constructor called ]" << std::endl;
 #endif
@@ -47,14 +49,16 @@ AForm::~AForm() {
 }
 
 /* ==============================================
- *                    Member functions
+ *                  Constructor
  * ============================================== */
 // Constructor
-AForm::AForm(std::string const& name, int gradeToSign, int gradeToExecute)
+AForm::AForm(std::string const& name, int gradeToSign, int gradeToExecute,
+             std::string const& target)
     : _name(name),
       _isSigned(false),
       _gradeToSign(gradeToSign),
-      _gradeToExecute(gradeToExecute) {
+      _gradeToExecute(gradeToExecute),
+      _target(target) {
 #if DEBUG
   std::cout << "[ AForm Constructor called ]" << std::endl;
 #endif
@@ -71,6 +75,10 @@ AForm::AForm(std::string const& name, int gradeToSign, int gradeToExecute)
     throw AForm::GradeTooLowException(_gradeToExecute);
   }
 }
+
+/* ==============================================
+ *                    Member functions
+ * ============================================== */
 
 // Member functions
 void AForm::beSigned(Bureaucrat const& b) {
@@ -117,6 +125,13 @@ int AForm::getGradeToExecute() const {
   return _gradeToExecute;
 }
 
+std::string AForm::getTarget() const {
+#if DEBUG
+  std::cout << "[ AForm getTarget called ]" << std::endl;
+#endif
+  return _target;
+}
+
 /* ==============================================
  *                    Exceptions
  * ============================================== */
@@ -145,7 +160,8 @@ const char* AForm::GradeTooHighException::what() const throw() {
 
 AForm::GradeTooHighException::GradeTooHighException(int grade) throw() {
 #if DEBUG
-  std::cout << "[ AForm GradeTooHighException Constructor called ]" << std::endl;
+  std::cout << "[ AForm GradeTooHighException Constructor called ]"
+            << std::endl;
 #endif
 
   std::ostringstream oss;
@@ -190,9 +206,9 @@ AForm::GradeTooLowException::GradeTooLowException(int grade) throw() {
  * ============================================== */
 // << overload
 std::ostream& operator<<(std::ostream& os, const AForm& f) {
-  os << f.getName() << " is "
-     << (f.getIsSigned() ? "signed" : "unsigned")
+  os << f.getName() << " is " << (f.getIsSigned() ? "signed" : "unsigned")
      << ", grade to sign: " << f.getGradeToSign()
-     << ", grade to execute: " << f.getGradeToExecute() << "." ;
+     << ", grade to execute: " << f.getGradeToExecute()
+     << ", target: " << f.getTarget() << ".";
   return os;
 }

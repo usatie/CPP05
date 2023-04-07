@@ -1,9 +1,9 @@
 #ifndef AFORM_HPP
-# define AFORM_HPP
+#define AFORM_HPP
 
-# include <iostream>
+#include <iostream>
 
-# include "Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
 
 class AForm {
  private:
@@ -11,16 +11,18 @@ class AForm {
   bool _isSigned;
   const int _gradeToSign;
   const int _gradeToExecute;
+  const std::string _target;
 
  public:
   // Orthodox Canonical Form
   AForm();
   AForm(const AForm& f);
   AForm& operator=(const AForm& f);
-  ~AForm();
+  virtual ~AForm();
 
   // Constructor
-  AForm(std::string const& name, int gradeToSign, int gradeToExecute);
+  AForm(std::string const& name, int gradeToSign, int gradeToExecute,
+        std::string const& target);
 
   // Member functions
   void beSigned(const Bureaucrat& b);
@@ -30,6 +32,7 @@ class AForm {
   bool getIsSigned() const;
   int getGradeToSign() const;
   int getGradeToExecute() const;
+  std::string getTarget() const;
 
   // Exceptions
   class GradeTooHighException : public std::exception {
