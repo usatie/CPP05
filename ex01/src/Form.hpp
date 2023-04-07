@@ -1,33 +1,35 @@
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include <iostream>
 
-#define HIGHEST_GRADE 1
-#define LOWEST_GRADE 150
+#include "Bureaucrat.hpp"
 
-class Bureaucrat {
+class Form {
  private:
-  std::string const _name;
-  int _grade;
+  const std::string _name;
+  bool _signed;
+  const int _gradeToSign;
+  const int _gradeToExecute;
 
  public:
   // Orthodox Canonical Form
-  Bureaucrat();
-  Bureaucrat(const Bureaucrat& b);
-  Bureaucrat& operator=(const Bureaucrat& b);
-  ~Bureaucrat();
+  Form();
+  Form(const Form& f);
+  Form& operator=(const Form& f);
+  ~Form();
 
   // Constructor
-  Bureaucrat(std::string const& name, int grade);
+  Form(std::string const& name, int gradeToSign, int gradeToExecute);
 
   // Member functions
-  void incrementGrade();
-  void decrementGrade();
+  void beSigned(const Bureaucrat& b);
 
   // Getters
-  std::string const getName() const;
-  int getGrade() const;
+  std::string getName() const;
+  bool getSigned() const;
+  int getGradeToSign() const;
+  int getGradeToExecute() const;
 
   // Exceptions
   class GradeTooHighException : public std::exception {
@@ -62,7 +64,5 @@ class Bureaucrat {
     std::string _description;
   };
 };
-
-std::ostream& operator<<(std::ostream& os, Bureaucrat const& b);
 
 #endif

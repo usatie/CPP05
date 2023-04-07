@@ -3,8 +3,11 @@
 #include <iostream>
 #include <sstream>
 
+/* ==============================================
+ *           Orthodox Canonical Form
+ * ============================================== */
 // Default constructor
-Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {
+Bureaucrat::Bureaucrat() : _name("default"), _grade(LOWEST_GRADE) {
 #if DEBUG
   std::cout << "[ Bureaucrat Default constructor called ]" << std::endl;
 #endif
@@ -36,20 +39,50 @@ Bureaucrat::~Bureaucrat() {
 #endif
 }
 
+/* ==============================================
+ *                    Member functions
+ * ============================================== */
 // Constructor
 Bureaucrat::Bureaucrat(std::string const& name, int grade)
     : _name(name), _grade(grade) {
 #if DEBUG
   std::cout << "[ Bureaucrat Constructor called ]" << std::endl;
 #endif
-  if (_grade < _highestGrade) {
+  // Check if grade is valid
+  // Smaller number means higher grade
+  if (_grade < HIGHEST_GRADE) {
     throw Bureaucrat::GradeTooHighException(_grade);
-  } else if (_grade > _lowestGrade) {
+  } else if (_grade > LOWEST_GRADE) {
     throw Bureaucrat::GradeTooLowException(_grade);
   }
 }
 
 // Member functions
+void Bureaucrat::incrementGrade() {
+#if DEBUG
+  std::cout << "[ Bureaucrat::incrementGrade() called ]" << std::endl;
+#endif
+  if (_grade == HIGHEST_GRADE) {
+    throw Bureaucrat::GradeTooHighException(_grade);
+  } else {
+    _grade--;
+  }
+}
+
+void Bureaucrat::decrementGrade() {
+#if DEBUG
+  std::cout << "[ Bureaucrat::decrementGrade() called ]" << std::endl;
+#endif
+  if (_grade == LOWEST_GRADE) {
+    throw Bureaucrat::GradeTooLowException(_grade);
+  } else {
+    _grade++;
+  }
+}
+
+/* ==============================================
+ *                    Getters
+ * ============================================== */
 std::string const Bureaucrat::getName() const {
 #if DEBUG
   std::cout << "[ Bureaucrat::getName() called ]" << std::endl;
@@ -64,34 +97,15 @@ int Bureaucrat::getGrade() const {
   return _grade;
 }
 
-void Bureaucrat::incrementGrade() {
-#if DEBUG
-  std::cout << "[ Bureaucrat::incrementGrade() called ]" << std::endl;
-#endif
-  if (_grade == _highestGrade) {
-    throw Bureaucrat::GradeTooHighException(_grade);
-  } else {
-    _grade--;
-  }
-}
-
-void Bureaucrat::decrementGrade() {
-#if DEBUG
-  std::cout << "[ Bureaucrat::decrementGrade() called ]" << std::endl;
-#endif
-  if (_grade == _lowestGrade) {
-    throw Bureaucrat::GradeTooLowException(_grade);
-  } else {
-    _grade++;
-  }
-}
-
 // Non-member functions
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& b) {
   os << b.getName() << ", bureaucrat grade " << b.getGrade() << ".";
   return os;
 }
 
+/* ==============================================
+ *                    Exceptions
+ * ============================================== */
 // GradeTooHighException
 Bureaucrat::GradeTooHighException::GradeTooHighException() throw()
     : _description("Grade too high") {
