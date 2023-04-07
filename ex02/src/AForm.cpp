@@ -1,4 +1,4 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -7,31 +7,31 @@
  *           Orthodox Canonical Form
  * ============================================== */
 // Default constructor
-Form::Form()
+AForm::AForm()
     : _name("default"),
       _isSigned(false),
       _gradeToSign(LOWEST_GRADE),
       _gradeToExecute(LOWEST_GRADE) {
 #if DEBUG
-  std::cout << "[ Form Default constructor called ]" << std::endl;
+  std::cout << "[ AForm Default constructor called ]" << std::endl;
 #endif
 }
 
 // Constructor
-Form::Form(const Form& f)
+AForm::AForm(const AForm& f)
     : _name(f._name),
       _isSigned(f._isSigned),
       _gradeToSign(f._gradeToSign),
       _gradeToExecute(f._gradeToExecute) {
 #if DEBUG
-  std::cout << "[ Form Copy constructor called ]" << std::endl;
+  std::cout << "[ AForm Copy constructor called ]" << std::endl;
 #endif
 }
 
 // Copy assignment operator
-Form& Form::operator=(const Form& f) {
+AForm& AForm::operator=(const AForm& f) {
 #if DEBUG
-  std::cout << "[ Form Copy assignment operator called ]" << std::endl;
+  std::cout << "[ AForm Copy assignment operator called ]" << std::endl;
 #endif
   if (this != &f) {
     _isSigned = f._isSigned;
@@ -40,9 +40,9 @@ Form& Form::operator=(const Form& f) {
 }
 
 // Destructor
-Form::~Form() {
+AForm::~AForm() {
 #if DEBUG
-  std::cout << "[ Form destructor called ]" << std::endl;
+  std::cout << "[ AForm destructor called ]" << std::endl;
 #endif
 }
 
@@ -50,68 +50,68 @@ Form::~Form() {
  *                    Member functions
  * ============================================== */
 // Constructor
-Form::Form(std::string const& name, int gradeToSign, int gradeToExecute)
+AForm::AForm(std::string const& name, int gradeToSign, int gradeToExecute)
     : _name(name),
       _isSigned(false),
       _gradeToSign(gradeToSign),
       _gradeToExecute(gradeToExecute) {
 #if DEBUG
-  std::cout << "[ Form Constructor called ]" << std::endl;
+  std::cout << "[ AForm Constructor called ]" << std::endl;
 #endif
   // Check if grade is valid
   // Smaller number means higher grade
   if (_gradeToSign < HIGHEST_GRADE) {
-    throw Form::GradeTooHighException(_gradeToSign);
+    throw AForm::GradeTooHighException(_gradeToSign);
   } else if (_gradeToSign > LOWEST_GRADE) {
-    throw Form::GradeTooLowException(_gradeToSign);
+    throw AForm::GradeTooLowException(_gradeToSign);
   }
   if (_gradeToExecute < HIGHEST_GRADE) {
-    throw Form::GradeTooHighException(_gradeToExecute);
+    throw AForm::GradeTooHighException(_gradeToExecute);
   } else if (_gradeToExecute > LOWEST_GRADE) {
-    throw Form::GradeTooLowException(_gradeToExecute);
+    throw AForm::GradeTooLowException(_gradeToExecute);
   }
 }
 
 // Member functions
-void Form::beSigned(Bureaucrat const& b) {
+void AForm::beSigned(Bureaucrat const& b) {
 #if DEBUG
-  std::cout << "[ Form beSigned called ]" << std::endl;
+  std::cout << "[ AForm beSigned called ]" << std::endl;
 #endif
   if (b.getGrade() <= _gradeToSign) {
     _isSigned = true;
   } else {
-    throw Form::GradeTooLowException(b.getGrade());
+    throw AForm::GradeTooLowException(b.getGrade());
   }
 }
 
 /* ==============================================
  *                    Getters
  * ============================================== */
-std::string Form::getName() const {
+std::string AForm::getName() const {
 #if DEBUG
-  std::cout << "[ Form getName called ]" << std::endl;
+  std::cout << "[ AForm getName called ]" << std::endl;
 #endif
   return _name;
 }
 
-bool Form::getIsSigned() const {
+bool AForm::getIsSigned() const {
 #if DEBUG
-  std::cout << "[ Form getIsSigned called ]" << std::endl;
+  std::cout << "[ AForm getIsSigned called ]" << std::endl;
 #endif
   return _isSigned;
 }
 
-int Form::getGradeToSign() const {
+int AForm::getGradeToSign() const {
 #if DEBUG
-  std::cout << "[ Form getGradeToSign called ]" << std::endl;
+  std::cout << "[ AForm getGradeToSign called ]" << std::endl;
 #endif
 
   return _gradeToSign;
 }
 
-int Form::getGradeToExecute() const {
+int AForm::getGradeToExecute() const {
 #if DEBUG
-  std::cout << "[ Form getGradeToExecute called ]" << std::endl;
+  std::cout << "[ AForm getGradeToExecute called ]" << std::endl;
 #endif
 
   return _gradeToExecute;
@@ -121,31 +121,31 @@ int Form::getGradeToExecute() const {
  *                    Exceptions
  * ============================================== */
 // GradeTooHighException
-Form::GradeTooHighException::GradeTooHighException() throw()
+AForm::GradeTooHighException::GradeTooHighException() throw()
     : _description("Grade is too high") {
 #if DEBUG
-  std::cout << "[ Form GradeTooHighException Default constructor called ]"
+  std::cout << "[ AForm GradeTooHighException Default constructor called ]"
             << std::endl;
 #endif
 }
 
-Form::GradeTooHighException::~GradeTooHighException() throw() {
+AForm::GradeTooHighException::~GradeTooHighException() throw() {
 #if DEBUG
-  std::cout << "[ Form GradeTooHighException destructor called ]" << std::endl;
+  std::cout << "[ AForm GradeTooHighException destructor called ]" << std::endl;
 #endif
 }
 
-const char* Form::GradeTooHighException::what() const throw() {
+const char* AForm::GradeTooHighException::what() const throw() {
 #if DEBUG
-  std::cout << "[ Form GradeTooHighException what called ]" << std::endl;
+  std::cout << "[ AForm GradeTooHighException what called ]" << std::endl;
 #endif
 
   return _description.c_str();
 }
 
-Form::GradeTooHighException::GradeTooHighException(int grade) throw() {
+AForm::GradeTooHighException::GradeTooHighException(int grade) throw() {
 #if DEBUG
-  std::cout << "[ Form GradeTooHighException Constructor called ]" << std::endl;
+  std::cout << "[ AForm GradeTooHighException Constructor called ]" << std::endl;
 #endif
 
   std::ostringstream oss;
@@ -154,31 +154,31 @@ Form::GradeTooHighException::GradeTooHighException(int grade) throw() {
 }
 
 // GradeTooLowException
-Form::GradeTooLowException::GradeTooLowException() throw()
+AForm::GradeTooLowException::GradeTooLowException() throw()
     : _description("Grade is too low") {
 #if DEBUG
-  std::cout << "[ Form GradeTooLowException Default constructor called ]"
+  std::cout << "[ AForm GradeTooLowException Default constructor called ]"
             << std::endl;
 #endif
 }
 
-Form::GradeTooLowException::~GradeTooLowException() throw() {
+AForm::GradeTooLowException::~GradeTooLowException() throw() {
 #if DEBUG
-  std::cout << "[ Form GradeTooLowException destructor called ]" << std::endl;
+  std::cout << "[ AForm GradeTooLowException destructor called ]" << std::endl;
 #endif
 }
 
-const char* Form::GradeTooLowException::what() const throw() {
+const char* AForm::GradeTooLowException::what() const throw() {
 #if DEBUG
-  std::cout << "[ Form GradeTooLowException what called ]" << std::endl;
+  std::cout << "[ AForm GradeTooLowException what called ]" << std::endl;
 #endif
 
   return _description.c_str();
 }
 
-Form::GradeTooLowException::GradeTooLowException(int grade) throw() {
+AForm::GradeTooLowException::GradeTooLowException(int grade) throw() {
 #if DEBUG
-  std::cout << "[ Form GradeTooLowException Constructor called ]" << std::endl;
+  std::cout << "[ AForm GradeTooLowException Constructor called ]" << std::endl;
 #endif
   std::ostringstream oss;
   oss << "Grade is too low: " << grade;
@@ -189,7 +189,7 @@ Form::GradeTooLowException::GradeTooLowException(int grade) throw() {
  *                    Overloads
  * ============================================== */
 // << overload
-std::ostream& operator<<(std::ostream& os, const Form& f) {
+std::ostream& operator<<(std::ostream& os, const AForm& f) {
   os << f.getName() << " is "
      << (f.getIsSigned() ? "signed" : "unsigned")
      << ", grade to sign: " << f.getGradeToSign()

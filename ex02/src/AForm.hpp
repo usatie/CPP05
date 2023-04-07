@@ -1,11 +1,11 @@
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
-#include <iostream>
+# include <iostream>
 
-#include "Bureaucrat.hpp"
+# include "Bureaucrat.hpp"
 
-class Form {
+class AForm {
  private:
   const std::string _name;
   bool _isSigned;
@@ -14,13 +14,13 @@ class Form {
 
  public:
   // Orthodox Canonical Form
-  Form();
-  Form(const Form& f);
-  Form& operator=(const Form& f);
-  ~Form();
+  AForm();
+  AForm(const AForm& f);
+  AForm& operator=(const AForm& f);
+  ~AForm();
 
   // Constructor
-  Form(std::string const& name, int gradeToSign, int gradeToExecute);
+  AForm(std::string const& name, int gradeToSign, int gradeToExecute);
 
   // Member functions
   void beSigned(const Bureaucrat& b);
@@ -35,7 +35,7 @@ class Form {
   class GradeTooHighException : public std::exception {
    public:
     // According to subject PDF, exception classes don't have to be designed
-    // in Orthodox Canonical Form
+    // in Orthodox Canonical AForm
     GradeTooHighException() throw();  // throw() is a C++98 thing. It's not
                                       // needed in C++11. It's a hint to the
                                       // compiler that the function will not
@@ -66,6 +66,6 @@ class Form {
 };
 
 // Insertion operator
-std::ostream& operator<<(std::ostream& os, const Form& f);
+std::ostream& operator<<(std::ostream& os, const AForm& f);
 
 #endif

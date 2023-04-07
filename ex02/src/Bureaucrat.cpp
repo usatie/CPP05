@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -80,8 +81,7 @@ void Bureaucrat::decrementGrade() {
   }
 }
 
-#include "Form.hpp"
-void Bureaucrat::signForm(Form& form) const {
+void Bureaucrat::signForm(AForm& form) const {
 #if DEBUG
   std::cout << "[ Bureaucrat::signForm() called ]" << std::endl;
 #endif

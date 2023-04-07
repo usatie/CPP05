@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #define RESET "\033[m"
 #define GREEN "\033[0;32m"
@@ -149,6 +149,7 @@ void test_bureaucrat() {
       std::cout << RED << e.what() << RESET << std::endl;
     }
   }
+  /*
   // Test Sign Form
   {
     printSubtitle("Test Sign Form");
@@ -193,163 +194,10 @@ void test_bureaucrat() {
       std::cout << RED << e.what() << RESET << std::endl;
     }
   }
-}
-
-void test_form() {
-  printTitle("Test Form");
-  // Test Orthodox Canonical Form
-  {
-    printSubtitle("Test Orthodox Canonical Form");
-    Form a;
-    Form b(a);
-    Form c = b;
-    a = c;
-  }
-  // Test Constructor
-  {
-    printSubtitle("Test Constructor");
-    try {
-      Form form("Submission Form", 1, 1);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test Constructor Grade Too High
-  {
-    printSubtitle("Test Constructor Grade Too High");
-    try {
-      Form form("Submission Form", 0, 1);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test Constructor Grade Too Low
-  {
-    printSubtitle("Test Constructor Grade Too Low");
-    try {
-      Form form("Submission Form", 151, 1);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test Constructor Grade Too High
-  {
-    printSubtitle("Test Constructor Grade Too High");
-    try {
-      Form form("Submission Form", 1, 0);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test Constructor Grade Too Low
-  {
-    printSubtitle("Test Constructor Grade Too Low");
-    try {
-      Form form("Submission Form", 1, 151);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test getName
-  {
-    printSubtitle("Test getName");
-    try {
-      Form form("Submission Form", 42, 42);
-      std::cout << form.getName() << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test getGradeToSign
-  {
-    printSubtitle("Test getGradeToSign");
-    try {
-      Form form("Submission Form", 42, 42);
-      std::cout << form.getGradeToSign() << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test getGradeToExecute
-  {
-    printSubtitle("Test getGradeToExecute");
-    try {
-      Form form("Submission Form", 42, 42);
-      std::cout << form.getGradeToExecute() << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test getIsSigned
-  {
-    printSubtitle("Test getIsSigned");
-    try {
-      Form form("Submission Form", 42, 42);
-      std::cout << form.getIsSigned() << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test beSigned
-  {
-    printSubtitle("Test beSigned");
-    try {
-      Form form("Submission Form", 42, 42);
-      std::cout << form << std::endl;
-      Bureaucrat bureaucrat("Tanaka", 42);
-      form.beSigned(bureaucrat);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test beSigned Grade Too Low
-  {
-    printSubtitle("Test beSigned Grade Too Low");
-    try {
-      Form form("Submission Form", 42, 42);
-      std::cout << form << std::endl;
-      Bureaucrat bureaucrat("Tanaka", 43);
-      form.beSigned(bureaucrat);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test beSigned Already Signed
-  {
-    printSubtitle("Test beSigned Already Signed");
-    try {
-      Form form("Submission Form", 42, 42);
-      std::cout << form << std::endl;
-      Bureaucrat bureaucrat("Tanaka", 42);
-      form.beSigned(bureaucrat);
-      std::cout << form << std::endl;
-      form.beSigned(bureaucrat);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
-  // Test operator<<
-  {
-    printSubtitle("Test operator<<");
-    try {
-      Form form("Submission Form", 42, 42);
-      std::cout << form << std::endl;
-    } catch (std::exception& e) {
-      std::cout << RED << e.what() << RESET << std::endl;
-    }
-  }
+  */
 }
 
 int main(void) {
   test_bureaucrat();
-  test_form();
   return 0;
 }
