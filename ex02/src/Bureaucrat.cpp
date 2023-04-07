@@ -5,6 +5,9 @@
 
 #include "AForm.hpp"
 
+#define RESET "\033[m"
+#define RED "\033[0;31m"
+
 /* ==============================================
  *           Orthodox Canonical Form
  * ============================================== */
@@ -94,10 +97,24 @@ void Bureaucrat::signForm(AForm& form) const {
       form.beSigned(*this);
       std::cout << _name << " signed " << form.getName() << std::endl;
     } catch (std::exception& e) {
-      std::cout << _name << " couldn't sign " << form.getName() << " because "
-                << e.what() << std::endl;
-      return;
+      std::cout << RED << _name << " couldn't sign " << form.getName()
+                << " because " << e.what() << std::endl
+                << RESET;
     }
+  }
+}
+
+void Bureaucrat::executeForm(AForm const& form) const {
+#if DEBUG
+  std::cout << "[ Bureaucrat::executeForm() called ]" << std::endl;
+#endif
+  try {
+    form.execute(*this);
+    std::cout << _name << " executed " << form.getName() << std::endl;
+  } catch (std::exception& e) {
+    std::cout << RED << _name << " couldn't execute " << form.getName()
+              << " because " << e.what() << std::endl
+              << RESET;
   }
 }
 

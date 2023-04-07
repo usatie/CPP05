@@ -152,14 +152,13 @@ void test_bureaucrat() {
       std::cout << RED << e.what() << RESET << std::endl;
     }
   }
-  /*
   // Test Sign Form
   {
     printSubtitle("Test Sign Form");
     try {
       Bureaucrat bureaucrat("Tanaka", 42);
-      Form form("Submission Form", 42, 42);
       std::cout << bureaucrat << std::endl;
+      RobotomyRequestForm form("Pawapoke-kun");
       std::cout << form << std::endl;
       bureaucrat.signForm(form);
       std::cout << form << std::endl;
@@ -171,9 +170,9 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Sign Form Grade Too Low");
     try {
-      Bureaucrat bureaucrat("Tanaka", 42);
-      Form form("Submission Form", 43, 42);
+      Bureaucrat bureaucrat("Tanaka", 150);
       std::cout << bureaucrat << std::endl;
+      RobotomyRequestForm form("Pawapoke-kun");
       std::cout << form << std::endl;
       bureaucrat.signForm(form);
       std::cout << form << std::endl;
@@ -186,8 +185,8 @@ void test_bureaucrat() {
     printSubtitle("Test Sign Form Already Signed");
     try {
       Bureaucrat bureaucrat("Tanaka", 42);
-      Form form("Submission Form", 42, 42);
       std::cout << bureaucrat << std::endl;
+      RobotomyRequestForm form("Pawapoke-kun");
       std::cout << form << std::endl;
       bureaucrat.signForm(form);
       std::cout << form << std::endl;
@@ -197,7 +196,54 @@ void test_bureaucrat() {
       std::cout << RED << e.what() << RESET << std::endl;
     }
   }
-  */
+  // Test Execute Form
+  {
+    printSubtitle("Test Execute Form");
+    try {
+      Bureaucrat bureaucrat("Tanaka", 42);
+      std::cout << bureaucrat << std::endl;
+      RobotomyRequestForm form("Pawapoke-kun");
+      std::cout << form << std::endl;
+      bureaucrat.signForm(form);
+      std::cout << form << std::endl;
+      bureaucrat.executeForm(form);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute Form Grade Too Low
+  {
+    printSubtitle("Test Execute Form Grade Too Low");
+    try {
+      Bureaucrat bureaucrat("Tanaka", 150);
+      Bureaucrat signer("Suzuki", 42);
+      std::cout << bureaucrat << std::endl;
+      std::cout << signer << std::endl;
+      RobotomyRequestForm form("Pawapoke-kun");
+      std::cout << form << std::endl;
+      signer.signForm(form);
+      std::cout << form << std::endl;
+      bureaucrat.executeForm(form);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute Form Not Signed
+  {
+    printSubtitle("Test Execute Form Not Signed");
+    try {
+      Bureaucrat bureaucrat("Tanaka", 42);
+      std::cout << bureaucrat << std::endl;
+      RobotomyRequestForm form("Pawapoke-kun");
+      std::cout << form << std::endl;
+      bureaucrat.executeForm(form);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
 }
 
 void test_shrubbery_creation_form() {
