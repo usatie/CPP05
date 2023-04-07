@@ -1,8 +1,9 @@
 #include "ShrubberyCreationForm.hpp"
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
+#define FORM_NAME "Shrubbery Creation Form"
 #define GRADE_TO_SIGN 145
 #define GRADE_TO_EXECUTE 137
 
@@ -11,8 +12,7 @@
  * ============================================== */
 // Default constructor
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("ShrubberyCreationForm", GRADE_TO_SIGN, GRADE_TO_EXECUTE,
-            "default") {
+    : AForm(FORM_NAME, GRADE_TO_SIGN, GRADE_TO_EXECUTE, "default") {
 #if DEBUG
   std::cout << "[ ShrubberyCreationForm Default constructor called ]"
             << std::endl;
@@ -49,7 +49,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
  *                  Constructor
  * ============================================== */
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const& target)
-    : AForm("ShrubberyCreationForm", GRADE_TO_SIGN, GRADE_TO_EXECUTE, target) {
+    : AForm(FORM_NAME, GRADE_TO_SIGN, GRADE_TO_EXECUTE, target) {
 #if DEBUG
   std::cout << "[ ShrubberyCreationForm constructor called ]" << std::endl;
 #endif
