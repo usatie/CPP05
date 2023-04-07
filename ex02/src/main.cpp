@@ -3,8 +3,9 @@
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 #define RESET "\033[m"
 #define GREEN "\033[0;32m"
@@ -332,11 +333,77 @@ void test_robotomy_request_form() {
   }
 }
 
+void test_presidential_pardon_form() {
+  printTitle("Test Presidential Pardon Form");
+  // Test Orthodox Canonical Form
+  {
+    printSubtitle("Test Orthodox Canonical Form");
+    PresidentialPardonForm a;
+    PresidentialPardonForm b(a);
+    PresidentialPardonForm c = b;
+    a = c;
+  }
+  // Test Constructor
+  {
+    printSubtitle("Test Constructor");
+    try {
+      PresidentialPardonForm form("Trillian");
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute
+  {
+    printSubtitle("Test Execute");
+    try {
+      PresidentialPardonForm form("Trillian");
+      Bureaucrat bureaucrat("Tanaka", 1);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.beSigned(bureaucrat);
+      form.execute(bureaucrat);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute Grade Too Low
+  {
+    printSubtitle("Test Execute Grade Too Low");
+    try {
+      PresidentialPardonForm form("Trillian");
+      Bureaucrat bureaucrat("Tanaka", 150);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.execute(bureaucrat);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute Form Not Signed
+  {
+    printSubtitle("Test Execute Form Not Signed");
+    try {
+      PresidentialPardonForm form("Trillian");
+      Bureaucrat bureaucrat("Tanaka", 42);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.execute(bureaucrat);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+}
+
 int main(void) {
   // Set random seed for RobotomyRequestForm
   srand((unsigned int)time(NULL));
   test_bureaucrat();
   test_shrubbery_creation_form();
   test_robotomy_request_form();
+  test_presidential_pardon_form();
   return 0;
 }
