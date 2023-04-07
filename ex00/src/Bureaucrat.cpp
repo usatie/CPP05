@@ -97,12 +97,6 @@ int Bureaucrat::getGrade() const {
   return _grade;
 }
 
-// Non-member functions
-std::ostream& operator<<(std::ostream& os, Bureaucrat const& b) {
-  os << b.getName() << ", bureaucrat grade " << b.getGrade() << ".";
-  return os;
-}
-
 /* ==============================================
  *                    Exceptions
  * ============================================== */
@@ -169,4 +163,13 @@ Bureaucrat::GradeTooLowException::GradeTooLowException(int grade) throw() {
   std::ostringstream oss;
   oss << "Grade too low: " << grade;
   _description = oss.str();
+}
+
+/* ==============================================
+ *                    Overloads
+ * ============================================== */
+// << overload
+std::ostream& operator<<(std::ostream& os, Bureaucrat const& b) {
+  os << b.getName() << ", bureaucrat grade " << b.getGrade() << ".";
+  return os;
 }

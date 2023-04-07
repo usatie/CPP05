@@ -63,6 +63,7 @@ class Bureaucrat {
   };
 };
 
+// Insertion operator
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& b);
 
 #endif
