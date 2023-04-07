@@ -80,6 +80,26 @@ void Bureaucrat::decrementGrade() {
   }
 }
 
+#include "Form.hpp"
+void Bureaucrat::signForm(Form& form) const {
+#if DEBUG
+  std::cout << "[ Bureaucrat::signForm() called ]" << std::endl;
+#endif
+  if (form.getIsSigned()) {
+    std::cout << _name << " couldn't sign " << form.getName()
+              << " because it is already signed." << std::endl;
+  } else {
+    try {
+      form.beSigned(*this);
+      std::cout << _name << " signed " << form.getName() << std::endl;
+    } catch (std::exception& e) {
+      std::cout << _name << " couldn't sign " << form.getName() << " because "
+                << e.what() << std::endl;
+      return;
+    }
+  }
+}
+
 /* ==============================================
  *                    Getters
  * ============================================== */

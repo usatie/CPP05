@@ -6,6 +6,9 @@
 #define HIGHEST_GRADE 1
 #define LOWEST_GRADE 150
 
+// To avoid circular dependencies
+class Form;
+
 class Bureaucrat {
  private:
   std::string const _name;
@@ -24,6 +27,7 @@ class Bureaucrat {
   // Member functions
   void incrementGrade();
   void decrementGrade();
+  void signForm(Form& form) const;
 
   // Getters
   std::string const getName() const;

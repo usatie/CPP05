@@ -51,7 +51,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Constructor");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 1);
+      Bureaucrat bureaucrat("Tanaka", 1);
       std::cout << bureaucrat << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;
@@ -61,7 +61,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Constructor Grade Too High");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 0);
+      Bureaucrat bureaucrat("Tanaka", 0);
       std::cout << bureaucrat << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;
@@ -71,7 +71,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Constructor Grade Too Low");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 151);
+      Bureaucrat bureaucrat("Tanaka", 151);
       std::cout << bureaucrat << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;
@@ -101,7 +101,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Increment");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 42);
+      Bureaucrat bureaucrat("Tanaka", 42);
       std::cout << bureaucrat << std::endl;
       bureaucrat.incrementGrade();
       std::cout << bureaucrat << std::endl;
@@ -113,7 +113,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Decrement");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 42);
+      Bureaucrat bureaucrat("Tanaka", 42);
       std::cout << bureaucrat << std::endl;
       bureaucrat.decrementGrade();
       std::cout << bureaucrat << std::endl;
@@ -125,7 +125,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Increment Grade Too High");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 1);
+      Bureaucrat bureaucrat("Tanaka", 1);
       std::cout << bureaucrat << std::endl;
       bureaucrat.incrementGrade();
       std::cout << bureaucrat << std::endl;
@@ -139,12 +139,56 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Decrement Grade Too Low");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 150);
+      Bureaucrat bureaucrat("Tanaka", 150);
       std::cout << bureaucrat << std::endl;
       bureaucrat.decrementGrade();
       std::cout << bureaucrat << std::endl;
       bureaucrat.decrementGrade();
       std::cout << bureaucrat << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Sign Form
+  {
+    printSubtitle("Test Sign Form");
+    try {
+      Bureaucrat bureaucrat("Tanaka", 42);
+      Form form("Submission Form", 42, 42);
+      std::cout << bureaucrat << std::endl;
+      std::cout << form << std::endl;
+      bureaucrat.signForm(form);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Sign Form Grade Too Low
+  {
+    printSubtitle("Test Sign Form Grade Too Low");
+    try {
+      Bureaucrat bureaucrat("Tanaka", 42);
+      Form form("Submission Form", 43, 42);
+      std::cout << bureaucrat << std::endl;
+      std::cout << form << std::endl;
+      bureaucrat.signForm(form);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Sign Form Already Signed
+  {
+    printSubtitle("Test Sign Form Already Signed");
+    try {
+      Bureaucrat bureaucrat("Tanaka", 42);
+      Form form("Submission Form", 42, 42);
+      std::cout << bureaucrat << std::endl;
+      std::cout << form << std::endl;
+      bureaucrat.signForm(form);
+      std::cout << form << std::endl;
+      bureaucrat.signForm(form);
+      std::cout << form << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;
     }
@@ -257,7 +301,7 @@ void test_form() {
     try {
       Form form("Submission Form", 42, 42);
       std::cout << form << std::endl;
-      Bureaucrat bureaucrat("Bureaucrat", 42);
+      Bureaucrat bureaucrat("Tanaka", 42);
       form.beSigned(bureaucrat);
       std::cout << form << std::endl;
     } catch (std::exception& e) {
@@ -270,7 +314,7 @@ void test_form() {
     try {
       Form form("Submission Form", 42, 42);
       std::cout << form << std::endl;
-      Bureaucrat bureaucrat("Bureaucrat", 43);
+      Bureaucrat bureaucrat("Tanaka", 43);
       form.beSigned(bureaucrat);
       std::cout << form << std::endl;
     } catch (std::exception& e) {
@@ -283,7 +327,7 @@ void test_form() {
     try {
       Form form("Submission Form", 42, 42);
       std::cout << form << std::endl;
-      Bureaucrat bureaucrat("Bureaucrat", 42);
+      Bureaucrat bureaucrat("Tanaka", 42);
       form.beSigned(bureaucrat);
       std::cout << form << std::endl;
       form.beSigned(bureaucrat);
