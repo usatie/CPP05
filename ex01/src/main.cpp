@@ -81,7 +81,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test getName");
     try {
-      Bureaucrat bureaucrat("Shun Usami", 42);
+      Bureaucrat bureaucrat("Tanaka", 42);
       std::cout << bureaucrat.getName() << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;

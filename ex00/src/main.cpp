@@ -50,7 +50,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Constructor");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 1);
+      Bureaucrat bureaucrat("Tanaka", 1);
       std::cout << bureaucrat << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;
@@ -60,7 +60,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Constructor Grade Too High");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 0);
+      Bureaucrat bureaucrat("Tanaka", 0);
       std::cout << bureaucrat << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;
@@ -70,7 +70,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Constructor Grade Too Low");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 151);
+      Bureaucrat bureaucrat("Tanaka", 151);
       std::cout << bureaucrat << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;
@@ -80,7 +80,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test getName");
     try {
-      Bureaucrat bureaucrat("Shun Usami", 42);
+      Bureaucrat bureaucrat("Tanaka", 42);
       std::cout << bureaucrat.getName() << std::endl;
     } catch (std::exception& e) {
       std::cout << RED << e.what() << RESET << std::endl;
@@ -100,7 +100,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Increment");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 42);
+      Bureaucrat bureaucrat("Tanaka", 42);
       std::cout << bureaucrat << std::endl;
       bureaucrat.incrementGrade();
       std::cout << bureaucrat << std::endl;
@@ -112,7 +112,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Decrement");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 42);
+      Bureaucrat bureaucrat("Tanaka", 42);
       std::cout << bureaucrat << std::endl;
       bureaucrat.decrementGrade();
       std::cout << bureaucrat << std::endl;
@@ -124,7 +124,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Increment Grade Too High");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 1);
+      Bureaucrat bureaucrat("Tanaka", 1);
       std::cout << bureaucrat << std::endl;
       bureaucrat.incrementGrade();
       std::cout << bureaucrat << std::endl;
@@ -138,7 +138,7 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Decrement Grade Too Low");
     try {
-      Bureaucrat bureaucrat("Bureaucrat", 150);
+      Bureaucrat bureaucrat("Tanaka", 150);
       std::cout << bureaucrat << std::endl;
       bureaucrat.decrementGrade();
       std::cout << bureaucrat << std::endl;
