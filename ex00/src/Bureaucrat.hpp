@@ -23,13 +23,12 @@ class Bureaucrat {
   // Exceptions
   class GradeTooHighException : public std::exception {
    public:
-    // Orthodox Canonical Form
+    // According to subject PDF, exception classes don't have to be designed
+    // in Orthodox Canonical Form
     GradeTooHighException() throw();  // throw() is a C++98 thing. It's not
                                       // needed in C++11. It's a hint to the
                                       // compiler that the function will not
                                       // throw an exception.
-    GradeTooHighException(const GradeTooHighException& e) throw();
-    GradeTooHighException& operator=(const GradeTooHighException& e) throw();
     virtual ~GradeTooHighException() throw();
     // what() is a virtual function in std::exception
     virtual const char* what() const throw();
@@ -42,10 +41,8 @@ class Bureaucrat {
 
   class GradeTooLowException : public std::exception {
    public:
-    // Orthodox Canonical Form
+    // std::exception
     GradeTooLowException() throw();
-    GradeTooLowException(const GradeTooLowException& e) throw();
-    GradeTooLowException& operator=(const GradeTooLowException& e) throw();
     virtual ~GradeTooLowException() throw();
     // what() is a virtual function in std::exception
     virtual const char* what() const throw();

@@ -101,24 +101,6 @@ Bureaucrat::GradeTooHighException::GradeTooHighException() throw()
 #endif
 }
 
-Bureaucrat::GradeTooHighException::GradeTooHighException(
-    const GradeTooHighException& e) throw()
-    : _description(e._description) {
-#if DEBUG
-  std::cout << "[ GradeTooHighException Copy constructor called ]" << std::endl;
-#endif
-}
-
-Bureaucrat::GradeTooHighException& Bureaucrat::GradeTooHighException::operator=(
-    const GradeTooHighException& e) throw() {
-#if DEBUG
-  std::cout << "[ GradeTooHighException Copy assignment operator called ]"
-            << std::endl;
-#endif
-  _description = e._description;
-  return *this;
-}
-
 Bureaucrat::GradeTooHighException::~GradeTooHighException() throw() {
 #if DEBUG
   std::cout << "[ GradeTooHighException destructor called ]" << std::endl;
@@ -150,24 +132,6 @@ Bureaucrat::GradeTooLowException::GradeTooLowException() throw()
   std::cout << "[ GradeTooLowException Default constructor called ]"
             << std::endl;
 #endif
-}
-
-Bureaucrat::GradeTooLowException::GradeTooLowException(
-    const GradeTooLowException& e) throw()
-    : _description(e._description) {
-#if DEBUG
-  std::cout << "[ GradeTooLowException Copy constructor called ]" << std::endl;
-#endif
-}
-
-Bureaucrat::GradeTooLowException& Bureaucrat::GradeTooLowException::operator=(
-    const GradeTooLowException& e) throw() {
-#if DEBUG
-  std::cout << "[ GradeTooLowException Copy assignment operator called ]"
-            << std::endl;
-#endif
-  _description = e._description;
-  return *this;
 }
 
 Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {
