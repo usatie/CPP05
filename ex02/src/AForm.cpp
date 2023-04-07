@@ -233,7 +233,7 @@ const char* AForm::FormNotSignedException::what() const throw() {
 #if DEBUG
   std::cout << "[ AForm FormNotSignedException what called ]" << std::endl;
 #endif
-    return "Form is not signed";
+  return "Form is not signed";
 }
 
 /* ==============================================
