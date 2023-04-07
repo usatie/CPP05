@@ -184,3 +184,15 @@ Form::GradeTooLowException::GradeTooLowException(int grade) throw() {
   oss << "Grade is too low: " << grade;
   _description = oss.str();
 }
+
+/* ==============================================
+ *                    Overloads
+ * ============================================== */
+// << overload
+std::ostream& operator<<(std::ostream& os, const Form& f) {
+  os << "Form " << f.getName() << " is "
+     << (f.getSigned() ? "signed" : "unsigned")
+     << ", grade to sign: " << f.getGradeToSign()
+     << ", grade to execute: " << f.getGradeToExecute();
+  return os;
+}

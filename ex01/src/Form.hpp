@@ -65,4 +65,7 @@ class Form {
   };
 };
 
+// Insertion operator
+std::ostream& operator<<(std::ostream& os, const Form& f);
+
 #endif
