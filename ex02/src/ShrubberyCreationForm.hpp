@@ -14,8 +14,9 @@ class ShrubberyCreationForm : public AForm {
   // Constructor
   explicit ShrubberyCreationForm(std::string const& target);
 
- protected:
  private:
+  // Member functions
+  void executeAction() const;
 };
 
 #endif

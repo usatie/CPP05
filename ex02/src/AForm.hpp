@@ -13,6 +13,9 @@ class AForm {
   const int _gradeToExecute;
   const std::string _target;
 
+ protected:
+  virtual void executeAction() const = 0;
+
  public:
   // Orthodox Canonical Form
   AForm();
@@ -26,6 +29,7 @@ class AForm {
 
   // Member functions
   void beSigned(const Bureaucrat& b);
+  void execute(const Bureaucrat& executor) const;
 
   // Getters
   std::string getName() const;
@@ -65,6 +69,15 @@ class AForm {
 
    private:
     std::string _description;
+  };
+
+  class FormNotSignedException : public std::exception {
+   public:
+    // std::exception
+    FormNotSignedException() throw();
+    virtual ~FormNotSignedException() throw();
+    // what() is a virtual function in std::exception
+    virtual const char* what() const throw();
   };
 };
 

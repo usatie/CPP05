@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include "Bureaucrat.hpp"
 
 #define RESET "\033[m"
@@ -197,7 +198,73 @@ void test_bureaucrat() {
   */
 }
 
+void test_shrubbery_creation_form() {
+  printTitle("Test Shrubbery Creation Form");
+  // Test Orthodox Canonical Form
+  {
+    printSubtitle("Test Orthodox Canonical Form");
+    ShrubberyCreationForm a;
+    ShrubberyCreationForm b(a);
+    ShrubberyCreationForm c = b;
+    a = c;
+  }
+  // Test Constructor
+  {
+    printSubtitle("Test Constructor");
+    try {
+      ShrubberyCreationForm form("home");
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute
+  {
+    printSubtitle("Test Execute");
+    try {
+      ShrubberyCreationForm form("home");
+      Bureaucrat bureaucrat("Tanaka", 42);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.beSigned(bureaucrat);
+      form.execute(bureaucrat);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute Grade Too Low
+  {
+    printSubtitle("Test Execute Grade Too Low");
+    try {
+      ShrubberyCreationForm form("home");
+      Bureaucrat bureaucrat("Tanaka", 150);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.execute(bureaucrat);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+  // Test Execute Form Not Signed
+  {
+    printSubtitle("Test Execute Form Not Signed");
+    try {
+      ShrubberyCreationForm form("home");
+      Bureaucrat bureaucrat("Tanaka", 42);
+      std::cout << form << std::endl;
+      std::cout << bureaucrat << std::endl;
+      form.execute(bureaucrat);
+      std::cout << form << std::endl;
+    } catch (std::exception& e) {
+      std::cout << RED << e.what() << RESET << std::endl;
+    }
+  }
+}
+
 int main(void) {
   test_bureaucrat();
+  test_shrubbery_creation_form();
   return 0;
 }

@@ -92,6 +92,19 @@ void AForm::beSigned(Bureaucrat const& b) {
   }
 }
 
+void AForm::execute(Bureaucrat const& executor) const {
+#if DEBUG
+  std::cout << "[ AForm execute called ]" << std::endl;
+#endif
+  if (_isSigned == false) {
+    throw AForm::FormNotSignedException();
+  }
+  if (executor.getGrade() > _gradeToExecute) {
+    throw AForm::GradeTooLowException(executor.getGrade());
+  }
+  executeAction();
+}
+
 /* ==============================================
  *                    Getters
  * ============================================== */
@@ -199,6 +212,28 @@ AForm::GradeTooLowException::GradeTooLowException(int grade) throw() {
   std::ostringstream oss;
   oss << "Grade is too low: " << grade;
   _description = oss.str();
+}
+
+// FormNotSignedException
+AForm::FormNotSignedException::FormNotSignedException() throw() {
+#if DEBUG
+  std::cout << "[ AForm FormNotSignedException Default constructor called ]"
+            << std::endl;
+#endif
+}
+
+AForm::FormNotSignedException::~FormNotSignedException() throw() {
+#if DEBUG
+  std::cout << "[ AForm FormNotSignedException destructor called ]"
+            << std::endl;
+#endif
+}
+
+const char* AForm::FormNotSignedException::what() const throw() {
+#if DEBUG
+  std::cout << "[ AForm FormNotSignedException what called ]" << std::endl;
+#endif
+    return "Form is not signed";
 }
 
 /* ==============================================
