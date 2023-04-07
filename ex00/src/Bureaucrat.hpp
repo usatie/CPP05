@@ -3,7 +3,14 @@
 
 #include <iostream>
 
+#define HIGHEST_GRADE 1
+#define LOWEST_GRADE 150
+
 class Bureaucrat {
+ private:
+  std::string const _name;
+  int _grade;
+
  public:
   // Orthodox Canonical Form
   Bureaucrat();
@@ -15,10 +22,12 @@ class Bureaucrat {
   Bureaucrat(std::string const& name, int grade);
 
   // Member functions
-  std::string const getName() const;
-  int getGrade() const;
   void incrementGrade();
   void decrementGrade();
+
+  // Getters
+  std::string const getName() const;
+  int getGrade() const;
 
   // Exceptions
   class GradeTooHighException : public std::exception {
@@ -52,13 +61,6 @@ class Bureaucrat {
    private:
     std::string _description;
   };
-
- protected:
- private:
-  std::string const _name;
-  int _grade;
-  static const int _highestGrade = 1;
-  static const int _lowestGrade = 150;
 };
 
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& b);
