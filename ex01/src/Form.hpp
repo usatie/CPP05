@@ -8,7 +8,7 @@
 class Form {
  private:
   const std::string _name;
-  bool _signed;
+  bool _isSigned;
   const int _gradeToSign;
   const int _gradeToExecute;
 
@@ -27,7 +27,7 @@ class Form {
 
   // Getters
   std::string getName() const;
-  bool getSigned() const;
+  bool getIsSigned() const;
   int getGradeToSign() const;
   int getGradeToExecute() const;
 

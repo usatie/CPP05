@@ -9,7 +9,7 @@
 // Default constructor
 Form::Form()
     : _name("default"),
-      _signed(false),
+      _isSigned(false),
       _gradeToSign(LOWEST_GRADE),
       _gradeToExecute(LOWEST_GRADE) {
 #if DEBUG
@@ -20,7 +20,7 @@ Form::Form()
 // Constructor
 Form::Form(const Form& f)
     : _name(f._name),
-      _signed(f._signed),
+      _isSigned(f._isSigned),
       _gradeToSign(f._gradeToSign),
       _gradeToExecute(f._gradeToExecute) {
 #if DEBUG
@@ -34,7 +34,7 @@ Form& Form::operator=(const Form& f) {
   std::cout << "[ Form Copy assignment operator called ]" << std::endl;
 #endif
   if (this != &f) {
-    _signed = f._signed;
+    _isSigned = f._isSigned;
   }
   return *this;
 }
@@ -52,7 +52,7 @@ Form::~Form() {
 // Constructor
 Form::Form(std::string const& name, int gradeToSign, int gradeToExecute)
     : _name(name),
-      _signed(false),
+      _isSigned(false),
       _gradeToSign(gradeToSign),
       _gradeToExecute(gradeToExecute) {
 #if DEBUG
@@ -78,7 +78,7 @@ void Form::beSigned(Bureaucrat const& b) {
   std::cout << "[ Form beSigned called ]" << std::endl;
 #endif
   if (b.getGrade() <= _gradeToSign) {
-    _signed = true;
+    _isSigned = true;
   } else {
     throw Form::GradeTooLowException(b.getGrade());
   }
@@ -94,11 +94,11 @@ std::string Form::getName() const {
   return _name;
 }
 
-bool Form::getSigned() const {
+bool Form::getIsSigned() const {
 #if DEBUG
-  std::cout << "[ Form getSigned called ]" << std::endl;
+  std::cout << "[ Form getIsSigned called ]" << std::endl;
 #endif
-  return _signed;
+  return _isSigned;
 }
 
 int Form::getGradeToSign() const {
@@ -191,7 +191,7 @@ Form::GradeTooLowException::GradeTooLowException(int grade) throw() {
 // << overload
 std::ostream& operator<<(std::ostream& os, const Form& f) {
   os << "Form " << f.getName() << " is "
-     << (f.getSigned() ? "signed" : "unsigned")
+     << (f.getIsSigned() ? "signed" : "unsigned")
      << ", grade to sign: " << f.getGradeToSign()
      << ", grade to execute: " << f.getGradeToExecute();
   return os;
