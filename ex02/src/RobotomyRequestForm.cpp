@@ -1,5 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 
+#include <cstdlib>
 #include <iostream>
 
 #define FORM_NAME "Robotomy Request Form"
