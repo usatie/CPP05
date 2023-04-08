@@ -12,7 +12,7 @@ next_num := $(shell printf '%02d' $(shell echo $(num) + 1 | bc))
 
 newdir_name := $(prefix)$(next_num)
 
-.PHONY: newdir
+.PHONY: newdir all format run norm
 
 all:
 	# Build all the sub directories
@@ -21,6 +21,16 @@ all:
 format:
 	# Format all the sub directories
 	for dir in $(wildcard ex*); do make -C $$dir format ; done
+
+run:
+	# Format all the sub directories
+	for dir in $(wildcard ex*); do make -C $$dir run ; done
+
+norm:
+	# -I for ignoring case
+	# -E for using extended regular expressions
+	# -r for recursive
+	grep -I -E "alloc|free|alloc|using|friend" -r ex* || echo "No errors found"
 
 newdir:
 	# Create the new directory
