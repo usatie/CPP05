@@ -1,7 +1,7 @@
 #include "RobotomyRequestForm.hpp"
 
+#include <cstdlib>
 #include <iostream>
-#include <srand>
 
 #define FORM_NAME "robotomy request"
 #define GRADE_TO_SIGN 72
