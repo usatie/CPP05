@@ -64,7 +64,7 @@ void ShrubberyCreationForm::executeAction() const {
 #if DEBUG
   std::cout << "[ ShrubberyCreationForm executeAction called ]" << std::endl;
 #endif
-  std::ofstream ofs(getTarget() + "_shrubbery");
+  std::ofstream ofs((getTarget() + "_shrubbery").c_str());
   if (!ofs) {
     std::cerr << RED << "Error: cannot open file " << getTarget()
               << "_shrubbery" << std::endl
