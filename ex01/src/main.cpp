@@ -167,8 +167,8 @@ void test_bureaucrat() {
   {
     printSubtitle("Test Sign Form Grade Too Low");
     try {
-      Bureaucrat bureaucrat("Tanaka", 42);
-      Form form("Submission Form", 43, 42);
+      Bureaucrat bureaucrat("Tanaka", 43);
+      Form form("Submission Form", 42, 42);
       std::cout << bureaucrat << std::endl;
       std::cout << form << std::endl;
       bureaucrat.signForm(form);
